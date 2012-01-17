@@ -1,0 +1,54 @@
+<!-- v0.5 -->
+
+<form id="form" action="ajax-enquiry.php" method="get">
+<p class="hide">
+<input type="hidden" name="email_to" value="your@email.com" />
+<input type="hidden" name="reqd" value="name,email,tel" />
+</p>
+<div id="form-msg" class="msg"></div>
+<fieldset>
+<legend>Your details</legend>
+<ul>
+<li><label for="name">Name</label> <input type="text" id="name" name="name" /></li>
+<li><label for="tel">Tel</label> <input type="text" id="tel" name="tel" /></li>
+<li><label for="email">Email</label> <input type="text" id="email" name="email" /></li>
+<li><label for="subject">Subject</label> <input type="text" id="subject" name="subject" /></li>
+<li><label for="message">Message</label> <textarea id="message" name="message" cols="30" rows="6"></textarea></li>
+<li><label for="submit"></label> <input type="submit" id="submit" name="submit" value="Send" /><span id="form-loader" class="loader">Sending...</span></li>
+</ul>
+</fieldset>
+</form>
+
+<script type="text/javascript">
+//on form submit
+//@requires jQuery
+$('#form').submit(function() {
+	//make url for ajax request
+	var serialize = $(this).serialize();
+	var action = $(this).attr('action');
+	var datasend = action + '?' + serialize;
+	//show loader
+	$('#form-loader').show();
+	//load msg
+	$('#form-msg').load(datasend, function() { 
+		//remove all error classes
+		$('#form').find('label, input, textarea').removeClass('error')
+		//hide loader
+		$('#form-loader').hide(1, function() {
+			//get the error fields
+			var fieldsStr = $('#form-msg ul').attr('title');
+			var fieldsArr = fieldsStr.split(',');
+			//make each error label red
+			for(var i in fieldsArr) {
+				$('label[for='+ fieldsArr[i] +']').addClass('error');
+				$('input[name='+ fieldsArr[i] +']').addClass('error');
+				$('textarea[name='+ fieldsArr[i] +']').addClass('error');
+			}
+			//scroll to top
+			$('html, body').animate({scrollTop:100}, 'slow');
+		});
+	});
+	//preventDefault
+	return false;
+});
+</script>
