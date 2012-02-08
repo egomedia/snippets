@@ -1,5 +1,5 @@
 <?
-//v0.3
+//v0.4
 //check valid email
 function is_valid_email($email) { 
 	if( (preg_match('/(@.*@)|(\.\.)|(@\.)|(\.@)|(^\.)/', $email)) || 
@@ -27,11 +27,18 @@ foreach ($reqd as $field) {
 if (!$error) {
 	$to = $_GET["email_to"];
 	$from = $_GET["email"];
-	$subject = "Online enquiry";
+	//make subject
+	if ($_GET["subject"]) {
+		$subject = $_GET["subject"];
+	} else {
+		$subject = "Online enquiry";
+	}
+	//make body
 	foreach ($_GET as $key => $value) {
 		if ($key=='email_to' || $key=='reqd') { continue; }
 		$msg .= ucfirst(str_replace("_", " ", $key)).": $value \n\n";
 	}
+	//send
 	if (mail($to, $subject, $msg, "From: $from\r\n")) {
 		$report[] = "Enquiry delivered.";	
 	} else {
