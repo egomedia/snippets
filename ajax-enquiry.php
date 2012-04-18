@@ -32,6 +32,11 @@ if (!$error) {
 	$to = $_GET["_emailto"];
 	$from = $_GET["email"];
 	
+	//add receipt address
+	if ($_GET["_receipt"]) {
+		$to .= ','.$_GET["email"];
+	}
+	
 	//make subject
 	if ($_GET["_subject"]) {
 		$subject = $_GET["_subject"];
