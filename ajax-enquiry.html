@@ -1,9 +1,9 @@
-<!-- v0.5 -->
+<!-- v0.6 -->
 
 <form id="form" action="ajax-enquiry.php" method="get">
 <p class="hide">
-<input type="hidden" name="email_to" value="your@email.com" />
-<input type="hidden" name="reqd" value="name,email,tel" />
+<input type="hidden" name="_emailto" value="your@email.com" />
+<input type="hidden" name="_reqd" value="name,email,tel" />
 </p>
 <div id="form-msg" class="msg"></div>
 <fieldset>
@@ -12,7 +12,7 @@
 <li><label for="name">Name</label> <input type="text" id="name" name="name" /></li>
 <li><label for="tel">Tel</label> <input type="text" id="tel" name="tel" /></li>
 <li><label for="email">Email</label> <input type="text" id="email" name="email" /></li>
-<li><label for="subject">Subject</label> <input type="text" id="subject" name="subject" /></li>
+<li><label for="_subject">Subject</label> <input type="text" id="_subject" name="_subject" /></li>
 <li><label for="message">Message</label> <textarea id="message" name="message" cols="30" rows="6"></textarea></li>
 <li><label for="submit"></label> <input type="submit" id="submit" name="submit" value="Send" /><span id="form-loader" class="loader">Sending...</span></li>
 </ul>
